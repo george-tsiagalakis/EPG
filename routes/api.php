@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Channel;
+use App\Timetable;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,16 +23,28 @@ Route::group(['prefix' => 'v1', 'as' => 'v1_'], function () {
 	Route::group(['prefix' => 'channels', 'namespace' => 'Channels'], function () {
 
 		Route::get('', function () {
-			return 'channels';
+
+			return response()->json(Channel::all());
+
 		})->name('channels');
 
         // Endpoints containing fixed parts should be placed higher in order to avoid conflicts with other endpoints being fully parameterised with the  same number of parts; simpler with less maintainance and faster -in this particular case- than via where or global constraints
-		Route::get('{channel_uuid}/programmes/{programme_uuid}', function ($channel_uuid, $programme_uuid) {
-			return 'info';
+		Route::get('{channel_uuid}/programmes/{programme_uuid}', function (App\Channel $channel_uuid, App\Programme $programme_uuid) {
+
+			return response()->json(Programme::channel($channel_uuid)->
+                                               programme($programme_uuid)->
+                                               get());
+
 		})->name('programme_information');
 
-		Route::get('{channel_uuid}/{date}/{timezone}', function ($channel_uuid, $date, $timezone) {
-			return 'timetable';
+		Route::get('{channel_uuid}/{date}/{timezone}', function (App\Channel $channel_uuid, $date, $timezone) {
+
+			return response()->json(Timetable::channel($channel_uuid)->
+                                               programme($programme_uuid)->
+                                               on_date($date)->
+                                               timezone($timezone)->
+                                               get());
+
 		})->name('programme_timetable');
 
 	});
