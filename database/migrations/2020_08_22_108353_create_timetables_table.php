@@ -14,12 +14,13 @@ class CreateTimetablesTable extends Migration
     public function up()
     {
         Schema::create('timetables', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid')->index();
+
+            $table->uuid('id')->primary();
+            $table->uuid('channel_id');
+            $table->uuid('programme_id');
             $table->dateTimeTz('start_time', 0);
             $table->dateTimeTz('end_time', 0);
-            $table->unsignedBigInteger('channel_id');
-            $table->unsignedBigInteger('programme_id');
+            $table->string('timezone', 30);
             $table->timestamps();
 
             $table->foreign('channel_id')->references('id')->on('channels');

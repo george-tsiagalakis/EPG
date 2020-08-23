@@ -6,15 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Programme extends Model
 {
-    protected $hidden = ['id'];
+	protected $hidden = ['pivot', 'created_at', 'updated_at'];
+    protected $casts = ['id' => 'string'];
 
-	/**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
+    public function channels()
     {
-        return 'uuid';
+       return $this->hasOneThrough('App\Timetable');
+    }
+
+    public function timetables()
+    {
+       return $this->belongsTo('App\Timetable');
     }
 }

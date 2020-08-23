@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Channel;
+use App\Programme;
 use App\Timetable;
 
 /*
@@ -22,35 +23,34 @@ Route::group(['prefix' => 'v1', 'as' => 'v1_'], function () {
     // CHANNELS
 	Route::group(['prefix' => 'channels', 'namespace' => 'Channels'], function () {
 
+        // Channel listing
 		Route::get('', function () {
 
 			return response()->json(Channel::all());
-
 		})->name('channels');
 
-        // Endpoints containing fixed parts should be placed higher in order to avoid conflicts with other endpoints being fully parameterised with the  same number of parts; simpler with less maintainance and faster -in this particular case- than via where or global constraints
-		Route::get('{channel_uuid}/programmes/{programme_uuid}', function (App\Channel $channel_uuid, App\Programme $programme_uuid) {
 
-			return response()->json(Programme::channel($channel_uuid)->
-                                               programme($programme_uuid)->
-                                               get());
+
+        // Programme info
+		Route::get('{channel_uuid}/programmes/{programme_uuid}', function ($channel_uuid, $programme_uuid) {
+
+			return response()->json(Programme::where('id', '=', $programme_uuid)->get());
 
 		})->name('programme_information');
 
-		Route::get('{channel_uuid}/{date}/{timezone}', function (App\Channel $channel_uuid, $date, $timezone) {
 
-			return response()->json(Timetable::channel($channel_uuid)->
-                                               programme($programme_uuid)->
-                                               on_date($date)->
-                                               timezone($timezone)->
-                                               get());
+        // Programme timetable
+        // Timezone in 2 parts as "Continent/City" as per https://www.php.net/manual/en/timezones.php, part B optional to allow for part A as "UTC", "GMT" etc
+		Route::get('{channel_uuid}/{date}/{timezone_part_A}/{timezone_part_B?}', function ($channel_uuid, $date, $timezone_part_A, $timezone_part_B = null) {
+            $timezone = $timezone_part_A . (empty($timezone_part_B) ?: '/' . $timezone_part_B);
 
+			return response()->json(App\Timetable::channel($channel_uuid)->date($date)->timezone($timezone)->get());
 		})->name('programme_timetable');
 
 	});
 });
 
-// Generic fallback to some specified page or helpful message instead of standard 404
+// Generic fallback on unknown URIs to some specified page or helpful message instead of standard 404
 Route::fallback(function () {
 
     // e.g. get list of declared routes

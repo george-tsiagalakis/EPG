@@ -18,10 +18,11 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(Programme::class, function (Faker $faker) {
+
     return [
-        'uuid' => $faker->uuid,
+        'id' => $faker->uuid,
         'name' => $faker->unique()->company,
-        'description' => $faker->unique()->realText($maxNbChars = 500, $indexSize = 2),
+        'description' => $faker->unique()->realText(500, 2),
         'thumbnail' => $faker->unique()->imageUrl(200, 200, 'business', true, 'Faker'),
     ];
 });

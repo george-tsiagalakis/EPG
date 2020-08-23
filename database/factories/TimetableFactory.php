@@ -23,12 +23,14 @@ $factory->define(Timetable::class, function (Faker $faker) {
 
     $channels   = Channel::all()->pluck('id')->toArray();
     $programmes = Programme::all()->pluck('id')->toArray();
+    $timezone   = $faker->randomElement(timezone_identifiers_list());
 
     return [
-        'uuid'         => $faker->uuid,
-        'start_time'   => $faker->dateTimeBetween($startDate = '-1 week', $endDate = 'now', $timezone = 'UTC'),
-        'end_time'     => $faker->dateTimeBetween($startDate = '-1 week', $endDate = 'now', $timezone = 'UTC'),
+        'id'           => $faker->uuid,
         'channel_id'   => $faker->randomElement($channels),
         'programme_id' => $faker->randomElement($programmes),
+        'start_time'   => $faker->dateTimeBetween('-1 hour', 'now', $timezone),
+        'end_time'     => $faker->dateTimeBetween('+1 hour', '+2 hours', $timezone),
+        'timezone'     => $timezone,
     ];
 });

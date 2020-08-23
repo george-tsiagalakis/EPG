@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Channel::class, function (Faker $faker) {
     return [
-        'uuid' => $faker->uuid,
+        'id'   => $faker->uuid,
         'name' => $faker->unique()->company,
         'icon' => $faker->unique()->imageUrl(200, 200, 'abstract', true, 'Faker'),
     ];

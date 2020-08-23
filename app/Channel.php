@@ -6,15 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Channel extends Model
 {
-    protected $hidden = ['id'];
+    protected $hidden = ['created_at', 'updated_at'];
+    protected $casts = ['id' => 'string'];
 
-	/**
-     * Get the route key for the model.
-     *
-     * @return string
-     */
-    public function getRouteKeyName()
+    public function programmes()
     {
-        return 'uuid';
+        return $this->hasManyThrough('App\Programme', 'App\Timetable');
     }
+
+    public function timetables()
+    {
+        return $this->belongsTo('App\Timetable');
+    }
+
 }
