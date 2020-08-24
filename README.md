@@ -1,3 +1,5 @@
+A demo API using Laravel 7.
+
 **SETUP**
 While in root directory:
 
