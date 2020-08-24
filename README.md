@@ -36,7 +36,7 @@ A Postman file in included in /misc. However my version of Postman (7.30.1 on Li
 
 * A PDF ERD of the database is included in /misc.
 
-**Code standards**
+**Coding standards check**
 
     vendor/bin/ecs check ./app --set psr-12 &&
     
