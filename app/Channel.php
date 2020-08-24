@@ -11,7 +11,7 @@ class Channel extends Model
 
     public function programmes()
     {
-        return $this->hasManyThrough('App\Programme', 'App\Timetable');
+        return $this->belongsTo('App\Programme', 'timetables');
     }
 
     public function timetables()

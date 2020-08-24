@@ -11,11 +11,11 @@ class Programme extends Model
 
     public function channels()
     {
-       return $this->hasOneThrough('App\Timetable');
+       return $this->belongsTo('App\Channel', 'timetables');
     }
 
     public function timetables()
     {
-       return $this->belongsTo('App\Timetable');
+       return $this->hasMany('App\Timetable');
     }
 }

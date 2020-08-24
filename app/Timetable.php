@@ -12,12 +12,12 @@ class Timetable extends Model
 
     public function channels()
     {
-        return $this->belongsTo('App\Channel');
+        return $this->belongsTo('App\Channel', 'channel_id');
     }
 
     public function programmes()
     {
-        return $this->belongsTo('App\Programme');
+        return $this->belongsTo('App\Programme', 'programme_id');
     }
 
     public function scopeChannel($query, $channel_id)
