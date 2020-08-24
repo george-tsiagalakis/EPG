@@ -34,7 +34,7 @@ While in root directory:
 
 **POSTMAN**
 
-A Postman file in included in /misc. However my version of Postman (7.30.1 on Linux) seems to have a problem saving endpoint URL values, either via a full data dump or collection export. As such, once importing the Postman dump it will provide all endpoints + env variables but without the URL values being present, so c/p the following values to the respective endpoints:
+A Postman file in included in /misc. However my version of Postman (7.30.1 on Linux) seems to have a problem saving endpoint URL values, either via a full data dump or collection export. As such, once importing the Postman dump it will provide all endpoints + env variables but without the URL values being present, so c/p the following values to the respective endpoints, and edit the env vars to having appropriate values:
 
  - GET List of channels -> {{host}}/{{base}}/channels
  - GET Programme timetable ->
