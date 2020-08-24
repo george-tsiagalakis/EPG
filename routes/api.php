@@ -32,11 +32,9 @@ Route::group(['prefix' => 'v1', 'as' => 'v1_'], function () {
         })->name('channels');
 
 
-
         // Programme info
         Route::get('{channel_uuid}/programmes/{programme_uuid}', function ($channel_uuid, $programme_uuid) {
             $filtered = Timetable::where([ ['programme_id', '=', $programme_uuid], ['channel_id', '=', $channel_uuid] ])->get();
-
             return response()->json(TimetableResource::collection($filtered));
         })->name('programme_information');
 
@@ -45,7 +43,6 @@ Route::group(['prefix' => 'v1', 'as' => 'v1_'], function () {
         // Timezone as "Continent/City" as per https://www.php.net/manual/en/timezones.php, part B optional to allow for part A as "UTC", "GMT" etc
         Route::get('{channel_uuid}/{date}/{timezone_part_A}/{timezone_part_B?}', function ($channel_uuid, $date, $timezone_part_A, $timezone_part_B = null) {
             $timezone = $timezone_part_A . (empty($timezone_part_B) ?: '/' . $timezone_part_B);
-
             $filtered = App\Timetable::channel($channel_uuid)->date($date)->timezone($timezone)->get();
 
             return response()->json(TimetableResource::collection($filtered));
