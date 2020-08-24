@@ -11,6 +11,6 @@ class ProgrammeSeeder extends Seeder
      */
     public function run()
     {
-       factory(App\Programme::class, 200)->create();
+        factory(App\Programme::class, 200)->create();
     }
 }

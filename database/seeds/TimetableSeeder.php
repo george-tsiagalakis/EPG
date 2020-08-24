@@ -11,6 +11,6 @@ class TimetableSeeder extends Seeder
      */
     public function run()
     {
-       factory(App\Timetable::class, 500)->create();
+        factory(App\Timetable::class, 500)->create();
     }
 }

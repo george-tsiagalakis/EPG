@@ -14,13 +14,11 @@ class CreateProgrammesTable extends Migration
     public function up()
     {
         Schema::create('programmes', function (Blueprint $table) {
-
             $table->uuid('id')->primary();
             $table->string('name', 100)->charset('utf8mb4');
             $table->text('description')->charset('utf8mb4')->nullable();
             $table->string('thumbnail', 255)->nullable()->unique();
             $table->timestamps();
-
         });
     }
 

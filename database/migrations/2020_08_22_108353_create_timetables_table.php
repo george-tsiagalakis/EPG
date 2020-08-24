@@ -14,7 +14,6 @@ class CreateTimetablesTable extends Migration
     public function up()
     {
         Schema::create('timetables', function (Blueprint $table) {
-
             $table->uuid('id')->primary();
             $table->uuid('channel_id');
             $table->uuid('programme_id');

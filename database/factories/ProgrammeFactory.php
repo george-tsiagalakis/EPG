@@ -18,7 +18,6 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(Programme::class, function (Faker $faker) {
-
     return [
         'id' => $faker->uuid,
         'name' => $faker->unique()->company,

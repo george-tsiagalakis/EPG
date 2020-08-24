@@ -14,7 +14,6 @@ class CreateChannelsTable extends Migration
     public function up()
     {
         Schema::create('channels', function (Blueprint $table) {
-
             $table->uuid('id')->primary();
             $table->string('name', 100)->charset('utf8mb4')->unique();
             $table->string('icon', 255)->nullable()->unique();
