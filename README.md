@@ -1,6 +1,7 @@
 A demo API using Laravel 7.
 
 **SETUP**
+
 While in root directory:
 
 1) Install composer dependencies:
@@ -29,6 +30,7 @@ While in root directory:
     curl {server}/api/v1/channels (where server is your 127.0.0.1 or other)
 
 **POSTMAN**
+
 A Postman file in included in /misc. However my version of Postman (7.30.1 on Linux) seems to have a problem saving endpoint URL values, either via a full data dump or collection export. As such, once importing the Postman dump it will provide all endpoints + env variables but without the URL values being present, so c/p the following values to the respective endpoints:
 
  - GET List of channels -> {{host}}/{{base}}/channels
@@ -38,4 +40,5 @@ A Postman file in included in /misc. However my version of Postman (7.30.1 on Li
    {{host}}/{{base}}/channels/{{channel_uuid}}/programmes/{{programme_uuid}}
 
 **ERD**
+
 * A PDF ERD of the database is included in /misc.
