@@ -18,7 +18,11 @@ While in root directory:
 
     php artisan test
 
-5) Check PSR-12:
+6) Quick data check:
+
+    curl {server}/api/v1/channels (where server is your 127.0.0.1 or other)
+    
+*) Check PSR-12:
 
     vendor/bin/ecs check ./app --set psr-12 &&
     
@@ -27,10 +31,6 @@ While in root directory:
     vendor/bin/ecs check ./database --set psr-12 &&
     
     vendor/bin/ecs check ./tests --set psr-12
-
-6) Quick check:
-
-    curl {server}/api/v1/channels (where server is your 127.0.0.1 or other)
 
 **POSTMAN**
 
