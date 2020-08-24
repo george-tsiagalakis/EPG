@@ -21,8 +21,11 @@ While in root directory:
 5) Check PSR-12:
 
     vendor/bin/ecs check ./app --set psr-12 &&
+    
     vendor/bin/ecs check ./routes --set psr-12 &&
+    
     vendor/bin/ecs check ./database --set psr-12 &&
+    
     vendor/bin/ecs check ./tests --set psr-12
 
 6) Quick check:
