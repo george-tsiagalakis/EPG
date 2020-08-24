@@ -18,5 +18,4 @@ class Channel extends Model
     {
         return $this->belongsTo('App\Timetable');
     }
-
 }

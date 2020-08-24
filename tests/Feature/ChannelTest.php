@@ -13,10 +13,10 @@ class ChannelTest extends TestCase
     protected $data;
     protected $properties;
 
-    public function setUp():void
+    public function setUp(): void
     {
-		parent::setUp();
-		$this->url = '/api/v1/channels';
+        parent::setUp();
+        $this->url = '/api/v1/channels';
         $this->response = $this->get($this->url);
         $this->data = $this->response->getData();
         $this->properties = ['id', 'name', 'icon'];
@@ -52,9 +52,10 @@ class ChannelTest extends TestCase
         $state = true;
 
         foreach ($this->properties as $property) {
-
-			$state = property_exists($this->data[0], $property);
-            if ($state === false) break;
+            $state = property_exists($this->data[0], $property);
+            if ($state === false) {
+                break;
+            }
         }
 
         $this->assertTrue($state);
@@ -70,13 +71,12 @@ class ChannelTest extends TestCase
         $state = true;
 
         foreach ($this->properties as $property) {
-
-			$state = !empty($this->data[0]->$property);
-            if ($state === false) break;
+            $state = !empty($this->data[0]->$property);
+            if ($state === false) {
+                break;
+            }
         }
 
         $this->assertTrue($state);
     }
-
-
 }

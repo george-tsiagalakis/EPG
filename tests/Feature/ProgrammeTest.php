@@ -2,11 +2,11 @@
 
 namespace Tests\Feature;
 
+use App\Channel;
+use App\Timetable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
-use App\Channel;
-use App\Timetable;
 
 class ProgrammeTest extends TestCase
 {
@@ -15,9 +15,9 @@ class ProgrammeTest extends TestCase
     protected $data;
     protected $properties;
 
-    public function setUp():void
+    public function setUp(): void
     {
-		parent::setUp();
+        parent::setUp();
 
         // dynamically seeded, so looking up
         $tmp = Channel::first()->toArray();
@@ -27,7 +27,7 @@ class ProgrammeTest extends TestCase
         $date = substr($tmp['start_time'], 0, 9);
         $timezone = $tmp['timezone'];
 
-		$this->url = '/api/v1/channels/' . $channel_id . '/' . $date . '/' . $timezone;
+        $this->url = '/api/v1/channels/' . $channel_id . '/' . $date . '/' . $timezone;
 
         $this->response = $this->get($this->url);
         $this->data = $this->response->getData();
@@ -54,9 +54,10 @@ class ProgrammeTest extends TestCase
         $state = true;
 
         foreach ($this->properties as $property) {
-
-			$state = property_exists($this->data[0], $property);
-            if ($state === false) break;
+            $state = property_exists($this->data[0], $property);
+            if ($state === false) {
+                break;
+            }
         }
 
         $this->assertTrue($state);
@@ -72,14 +73,12 @@ class ProgrammeTest extends TestCase
         $state = true;
 
         foreach ($this->properties as $property) {
-
-			$state = !empty($this->data[0]->$property);
-            if ($state === false) break;
+            $state = !empty($this->data[0]->$property);
+            if ($state === false) {
+                break;
+            }
         }
 
         $this->assertTrue($state);
     }
-
-
-
 }
